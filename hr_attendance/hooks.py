@@ -241,3 +241,13 @@ doc_events = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+fixtures = [
+    {"dt": "Custom Field", "filters": [
+        [
+            "module", "in", [
+                "Hr Attendance"
+
+            ]
+        ]
+    ]}
+]
