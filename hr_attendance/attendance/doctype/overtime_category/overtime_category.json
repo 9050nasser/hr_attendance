@@ -1,0 +1,45 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-04 11:52:12.258976",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "from_min",
+  "to_min",
+  "factor_per_minute"
+ ],
+ "fields": [
+  {
+   "fieldname": "from_min",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "From (Min)"
+  },
+  {
+   "fieldname": "to_min",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "To (Min)"
+  },
+  {
+   "fieldname": "factor_per_minute",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Factor Per Minute"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-12-04 12:27:25.575388",
+ "modified_by": "Administrator",
+ "module": "Attendance",
+ "name": "Overtime Category",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,548 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "AR-.####",
+ "creation": "2024-12-02 20:08:25.985767",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "absence_tab",
+  "enable_absence_rule",
+  "column_break_sqrj",
+  "section_break_wmix",
+  "deduct_from_salary",
+  "absence_salary_component",
+  "salary_deduction_absent_factor",
+  "column_break_sktt",
+  "deduct_from_leave_balance",
+  "leave_type",
+  "leave_deduction_absent_factor",
+  "tab_2_tab",
+  "enable_late_rule",
+  "enable_late_penalty",
+  "column_break_ndfn",
+  "late_in_salary_component",
+  "section_break_utur",
+  "late_rule_table",
+  "late_penalty_section",
+  "column_break_kmay",
+  "late_penalty_table",
+  "early_out_tab",
+  "enable_early_out_rule",
+  "enable_early_out_penalty",
+  "column_break_pvyp",
+  "early_out_salary_component",
+  "section_break_gmox",
+  "early_out_rule",
+  "section_break_huef",
+  "early_out_penalty",
+  "overtime_tab",
+  "enable_overtime",
+  "enable_overtime_fixed_amount",
+  "enable_overtime_categories",
+  "enable_overtime_morningevening",
+  "column_break_sndq",
+  "fixed_amount_per_hour",
+  "fixed_amount_salary_component",
+  "section_break_bovq",
+  "overtime_holiday_factor_per_hour",
+  "overtime_weekend_factor_per_hour",
+  "overtime_normal_factor_per_hour",
+  "minimum_early_overtime_minutes",
+  "overtime_maximum_per_month_hours",
+  "column_break_mbra",
+  "holiday_overtime_salary_component",
+  "weekend_overtime_salary_component",
+  "normal_overtime_salary_component",
+  "early_in_salary_component",
+  "overtime_maximum_per_day_hours",
+  "section_break_oyyg",
+  "overtime_category",
+  "salary_component",
+  "section_break_qfjt",
+  "morning_overtime_start_time",
+  "morning_overtime_end_time",
+  "morning_overtime_factor_per_hour",
+  "morning_and_evening_salary_component",
+  "column_break_pzob",
+  "evening_overtime_start_time",
+  "evening_overtime_end_time",
+  "evening_overtime_factor_per_hour",
+  "permission_tab",
+  "enable_permissions",
+  "section_break_fuar",
+  "allow_without_deduction",
+  "max_permissions_minutes",
+  "max_permissions_times",
+  "max_permmisions_period_minutes",
+  "column_break_pzgc",
+  "check_jrpx",
+  "permission_frequency_per_month",
+  "link_gskb",
+  "mission_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "absence_tab",
+   "fieldtype": "Tab Break",
+   "label": "Absence"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_absence_rule",
+   "fieldtype": "Check",
+   "label": "Enable Absence Rule"
+  },
+  {
+   "depends_on": "eval:doc.enable_absence_rule==1",
+   "fieldname": "section_break_wmix",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "deduct_from_salary",
+   "fieldtype": "Check",
+   "label": "Deduct From Salary"
+  },
+  {
+   "fieldname": "column_break_sktt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "deduct_from_leave_balance",
+   "fieldtype": "Check",
+   "label": "Deduct From Leave Balance"
+  },
+  {
+   "depends_on": "eval:doc.deduct_from_leave_balance==1",
+   "fieldname": "leave_type",
+   "fieldtype": "Link",
+   "label": "Leave Type",
+   "mandatory_depends_on": "eval:doc.deduct_from_leave_balance==1",
+   "options": "Leave Type"
+  },
+  {
+   "fieldname": "tab_2_tab",
+   "fieldtype": "Tab Break",
+   "label": "Late In"
+  },
+  {
+   "depends_on": "eval:doc.deduct_from_salary==1",
+   "fieldname": "salary_deduction_absent_factor",
+   "fieldtype": "Float",
+   "label": "Salary Deduction Absent Factor",
+   "mandatory_depends_on": "eval:doc.deduct_from_salary==1"
+  },
+  {
+   "depends_on": "eval:doc.deduct_from_leave_balance==1",
+   "fieldname": "leave_deduction_absent_factor",
+   "fieldtype": "Float",
+   "label": "Leave Deduction Absent Factor",
+   "mandatory_depends_on": "eval:doc.deduct_from_leave_balance==1"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_late_rule",
+   "fieldtype": "Check",
+   "label": "Enable Late Rule"
+  },
+  {
+   "fieldname": "early_out_tab",
+   "fieldtype": "Tab Break",
+   "label": "Early Out"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_early_out_rule",
+   "fieldtype": "Check",
+   "label": "Enable Early Out Rule"
+  },
+  {
+   "depends_on": "eval:doc.enable_late_rule==1",
+   "fieldname": "late_rule_table",
+   "fieldtype": "Table",
+   "label": "Late Rule Table",
+   "options": "Late In Rule"
+  },
+  {
+   "fieldname": "column_break_ndfn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_utur",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.deduct_from_salary==1",
+   "fieldname": "absence_salary_component",
+   "fieldtype": "Link",
+   "label": "Absence Salary Component",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
+   "mandatory_depends_on": "eval:doc.deduct_from_salary==1",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "column_break_sqrj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "late_penalty_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.enable_late_penalty==1",
+   "fieldname": "late_penalty_table",
+   "fieldtype": "Table",
+   "label": "Late Penalty Table",
+   "options": "Late Penalty Table"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_late_penalty",
+   "fieldtype": "Check",
+   "label": "Enable Late Penalty"
+  },
+  {
+   "depends_on": "eval:doc.enable_late_penalty==1",
+   "fieldname": "column_break_kmay",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.enable_late_rule==1 || doc.enable_late_penalty==1\r\n",
+   "fieldname": "late_in_salary_component",
+   "fieldtype": "Link",
+   "label": "Late In Salary Component",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
+   "mandatory_depends_on": "eval:doc.enable_late_rule==1 || doc.enable_late_penalty==1\r\n",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "column_break_pvyp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.enable_early_out_rule==1 || doc.enable_early_out_penalty==1\r\n",
+   "fieldname": "early_out_salary_component",
+   "fieldtype": "Link",
+   "label": "Early Out Salary Component",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
+   "mandatory_depends_on": "eval:doc.enable_early_out_rule==1 || doc.enable_early_out_penalty==1\r\n",
+   "options": "Salary Component"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_early_out_penalty",
+   "fieldtype": "Check",
+   "label": "Enable Early Out Penalty"
+  },
+  {
+   "fieldname": "section_break_gmox",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_huef",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.enable_early_out_penalty==1",
+   "fieldname": "early_out_penalty",
+   "fieldtype": "Table",
+   "label": "Early Out Penalty",
+   "options": "Early Out Penalty"
+  },
+  {
+   "depends_on": "eval:doc.enable_early_out_rule==1",
+   "fieldname": "early_out_rule",
+   "fieldtype": "Table",
+   "label": "Early Out Rule",
+   "options": "Early Out Rule"
+  },
+  {
+   "fieldname": "overtime_tab",
+   "fieldtype": "Tab Break",
+   "label": "Overtime"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_overtime",
+   "fieldtype": "Check",
+   "label": "Enable Overtime Rule"
+  },
+  {
+   "depends_on": "eval:doc.enable_overtime==1",
+   "fieldname": "section_break_bovq",
+   "fieldtype": "Section Break",
+   "label": "Rules"
+  },
+  {
+   "fieldname": "overtime_holiday_factor_per_hour",
+   "fieldtype": "Float",
+   "label": "Overtime Holiday Factor (Per Hour)"
+  },
+  {
+   "fieldname": "overtime_weekend_factor_per_hour",
+   "fieldtype": "Float",
+   "label": "Overtime Weekend Factor (Per Hour)"
+  },
+  {
+   "fieldname": "overtime_normal_factor_per_hour",
+   "fieldtype": "Float",
+   "label": "Overtime Normal Factor (Per Hour)"
+  },
+  {
+   "fieldname": "column_break_mbra",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "overtime_maximum_per_month_hours",
+   "fieldtype": "Float",
+   "label": "Overtime Maximum Per Month (Hours)"
+  },
+  {
+   "fieldname": "holiday_overtime_salary_component",
+   "fieldtype": "Link",
+   "label": "Holiday Overtime Salary Component",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "weekend_overtime_salary_component",
+   "fieldtype": "Link",
+   "label": "Weekend Overtime Salary Component",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "normal_overtime_salary_component",
+   "fieldtype": "Link",
+   "label": "Normal Overtime Salary Component",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "early_in_salary_component",
+   "fieldtype": "Link",
+   "label": "Early In Salary Component",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "overtime_maximum_per_day_hours",
+   "fieldtype": "Float",
+   "label": "Overtime Maximum Per Day (Hours)"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_overtime_fixed_amount",
+   "fieldtype": "Check",
+   "label": "Enable Overtime Fixed Amount",
+   "mandatory_depends_on": "eval:doc.enable_overtime==1"
+  },
+  {
+   "fieldname": "column_break_sndq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.enable_overtime_fixed_amount==1",
+   "fieldname": "fixed_amount_per_hour",
+   "fieldtype": "Float",
+   "label": "Fixed Amount Per Hour"
+  },
+  {
+   "depends_on": "eval:doc.enable_overtime_fixed_amount==1",
+   "fieldname": "fixed_amount_salary_component",
+   "fieldtype": "Link",
+   "label": "Fixed Amount Salary Component",
+   "options": "Salary Component"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_overtime_categories",
+   "fieldtype": "Check",
+   "label": "Enable Overtime Categories"
+  },
+  {
+   "depends_on": "eval:doc.enable_overtime_categories==1",
+   "fieldname": "section_break_oyyg",
+   "fieldtype": "Section Break",
+   "label": "Category"
+  },
+  {
+   "depends_on": "eval:doc.enable_overtime_categories==1",
+   "fieldname": "overtime_category",
+   "fieldtype": "Table",
+   "label": "Overtime Category",
+   "options": "Overtime Category"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_overtime_morningevening",
+   "fieldtype": "Check",
+   "label": "Enable Overtime Morning/Evening"
+  },
+  {
+   "depends_on": "eval:doc.enable_overtime_morningevening==1",
+   "fieldname": "section_break_qfjt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "morning_overtime_start_time",
+   "fieldtype": "Time",
+   "label": "Morning Overtime Start Time"
+  },
+  {
+   "fieldname": "morning_overtime_end_time",
+   "fieldtype": "Time",
+   "label": "Morning Overtime End Time"
+  },
+  {
+   "fieldname": "morning_overtime_factor_per_hour",
+   "fieldtype": "Float",
+   "label": "Morning Overtime Factor per Hour"
+  },
+  {
+   "fieldname": "column_break_pzob",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "evening_overtime_start_time",
+   "fieldtype": "Time",
+   "label": "Evening Overtime Start Time"
+  },
+  {
+   "fieldname": "evening_overtime_end_time",
+   "fieldtype": "Time",
+   "label": "Evening Overtime End Time"
+  },
+  {
+   "fieldname": "evening_overtime_factor_per_hour",
+   "fieldtype": "Float",
+   "label": "Evening Overtime Factor per Hour"
+  },
+  {
+   "fieldname": "minimum_early_overtime_minutes",
+   "fieldtype": "Float",
+   "label": "Minimum Early Overtime (Minutes)"
+  },
+  {
+   "fieldname": "salary_component",
+   "fieldtype": "Link",
+   "label": "Category Salary Component",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "morning_and_evening_salary_component",
+   "fieldtype": "Link",
+   "label": "Morning and Evening Salary Component",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "permission_tab",
+   "fieldtype": "Tab Break",
+   "label": "Permission"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_permissions",
+   "fieldtype": "Check",
+   "label": "Enable Permissions"
+  },
+  {
+   "fieldname": "section_break_fuar",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "allow_without_deduction",
+   "fieldtype": "Check",
+   "label": "Allow Without Deduction"
+  },
+  {
+   "fieldname": "max_permissions_minutes",
+   "fieldtype": "Float",
+   "label": "Max Permissions Minutes"
+  },
+  {
+   "fieldname": "max_permissions_times",
+   "fieldtype": "Float",
+   "label": "Max Permissions Times"
+  },
+  {
+   "fieldname": "max_permmisions_period_minutes",
+   "fieldtype": "Float",
+   "label": "Max Permmisions Period (Minutes)"
+  },
+  {
+   "fieldname": "column_break_pzgc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "check_jrpx",
+   "fieldtype": "Check",
+   "label": "Deduct from Leave Balance"
+  },
+  {
+   "fieldname": "permission_frequency_per_month",
+   "fieldtype": "Float",
+   "label": "Permission Frequency Per Month"
+  },
+  {
+   "fieldname": "link_gskb",
+   "fieldtype": "Link",
+   "label": "Leave Type",
+   "options": "Leave Type"
+  },
+  {
+   "fieldname": "mission_tab",
+   "fieldtype": "Tab Break",
+   "label": "Mission"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-12-07 21:40:36.770983",
+ "modified_by": "Administrator",
+ "module": "Attendance",
+ "name": "Attendance Rule",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,201 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "OR-.####",
+ "creation": "2024-12-04 13:14:16.384912",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ubiu",
+  "employee",
+  "employee_name",
+  "amended_from",
+  "column_break_crhw",
+  "department",
+  "designation",
+  "status",
+  "section_break_zbwu",
+  "date",
+  "overtime_start_time",
+  "overtime_end_time",
+  "total_overtime_hours",
+  "column_break_wejh",
+  "early_in",
+  "overtime_type",
+  "calculated_overtime_factor",
+  "calculated_overtime_amount",
+  "attendance"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ubiu",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Overtime Request",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_crhw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "section_break_zbwu",
+   "fieldtype": "Section Break",
+   "label": "Overtime Details"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "overtime_start_time",
+   "fieldtype": "Time",
+   "label": "Overtime Start Time"
+  },
+  {
+   "fieldname": "overtime_end_time",
+   "fieldtype": "Time",
+   "label": "Overtime End Time"
+  },
+  {
+   "fieldname": "column_break_wejh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "calculated_overtime_factor",
+   "fieldtype": "Float",
+   "label": "Calculated Overtime Factor"
+  },
+  {
+   "fieldname": "calculated_overtime_amount",
+   "fieldtype": "Float",
+   "label": "Calculated Overtime Amount"
+  },
+  {
+   "fieldname": "overtime_type",
+   "fieldtype": "Select",
+   "label": "Overtime Type",
+   "options": "\nHoliday Overtime\nWeekend Overtime\nNormal Overtime"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nApproved\nRejected"
+  },
+  {
+   "fieldname": "total_overtime_hours",
+   "fieldtype": "Float",
+   "label": "Total Overtime Hours"
+  },
+  {
+   "default": "0",
+   "fieldname": "early_in",
+   "fieldtype": "Check",
+   "label": "Early In",
+   "read_only": 1
+  },
+  {
+   "fieldname": "attendance",
+   "fieldtype": "Link",
+   "label": "Attendance",
+   "options": "Attendance",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-12-09 14:24:10.203952",
+ "modified_by": "Administrator",
+ "module": "Attendance",
+ "name": "Overtime Request",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_views": 1
+}
