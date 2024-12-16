@@ -68,7 +68,7 @@
   "evening_overtime_start_time",
   "evening_overtime_end_time",
   "evening_overtime_factor_per_hour",
-  "permission_tab",
+  "section_break_oklt",
   "enable_permissions",
   "section_break_fuar",
   "allow_without_deduction",
@@ -79,7 +79,14 @@
   "check_jrpx",
   "permission_frequency_per_month",
   "link_gskb",
-  "mission_tab"
+  "target_hours_tab",
+  "enable_penalty_based_on_target_hours",
+  "penalty_amount_per_hour",
+  "penalty_component",
+  "column_break_nhjf",
+  "enable_overtime_based_on_target_hours",
+  "factor_per_hour",
+  "overtime_component"
  ],
  "fields": [
   {
@@ -434,11 +441,6 @@
    "options": "Salary Component"
   },
   {
-   "fieldname": "permission_tab",
-   "fieldtype": "Tab Break",
-   "label": "Permission"
-  },
-  {
    "default": "0",
    "fieldname": "enable_permissions",
    "fieldtype": "Check",
@@ -491,14 +493,58 @@
    "options": "Leave Type"
   },
   {
-   "fieldname": "mission_tab",
+   "fieldname": "section_break_oklt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "target_hours_tab",
    "fieldtype": "Tab Break",
-   "label": "Mission"
+   "label": "Target Hours"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_penalty_based_on_target_hours",
+   "fieldtype": "Check",
+   "label": "Enable Penalty Based On Target Hours"
+  },
+  {
+   "fieldname": "column_break_nhjf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_overtime_based_on_target_hours",
+   "fieldtype": "Check",
+   "label": "Enable Overtime Based On Target Hours"
+  },
+  {
+   "fieldname": "factor_per_hour",
+   "fieldtype": "Currency",
+   "label": "Overtime Amount Per Hour"
+  },
+  {
+   "fieldname": "overtime_component",
+   "fieldtype": "Link",
+   "label": "Overtime Component",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Earning\"]]",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "penalty_component",
+   "fieldtype": "Link",
+   "label": "Penalty Component",
+   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
+   "options": "Salary Component"
+  },
+  {
+   "fieldname": "penalty_amount_per_hour",
+   "fieldtype": "Currency",
+   "label": "Penalty Amount Per Hour"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-07 21:40:36.770983",
+ "modified": "2024-12-11 00:14:02.509014",
  "modified_by": "Administrator",
  "module": "Attendance",
  "name": "Attendance Rule",
