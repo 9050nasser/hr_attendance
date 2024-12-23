@@ -43,7 +43,9 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-doctype_js = {"Attendance" : "public/js/attendance.js"}
+doctype_js = {"Attendance" : "public/js/attendance.js",
+              "Compensatory Leave Request": "public/js/compensatory_leave_request.js",
+              "Leave Application" : "public/js/leave_application.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -139,8 +141,17 @@ doctype_js = {"Attendance" : "public/js/attendance.js"}
 
 doc_events = {
 	"Attendance":{
+        "before_submit": "hr_attendance.doctype_triggers.attendance.before_submit",
         "on_submit": "hr_attendance.doctype_triggers.attendance.on_submit",
         "before_cancel": "hr_attendance.doctype_triggers.attendance.on_cancel"
+    },
+    "Leave Application":{
+        "validate": "hr_attendance.doctype_triggers.leave_application.validate"
+    },
+    "Compensatory Leave Request":{
+        "validate":"hr_attendance.doctype_triggers.compensatory_leave_request.validate",
+        "on_submit":"hr_attendance.doctype_triggers.compensatory_leave_request.on_submit",
+        "on_cancel":"hr_attendance.doctype_triggers.compensatory_leave_request.on_cancel"
     }
 }
 

@@ -13,6 +13,17 @@ def on_submit(doc, method):
         check_for_late_early(doc, attendance_rule)
         check_for_overtime(doc, attendance_rule)
 
+def before_submit(doc, method):
+    if doc.shift:
+        start_time, end_time, custom_minimum_working_hours_to_mark_present, custom_apply_maximum_working_hours_cap = frappe.db.get_value("Shift Type", doc.shift, ["start_time", "end_time", "custom_minimum_working_hours_to_mark_present", "custom_apply_maximum_working_hours_cap"])
+        if doc.working_hours:
+            if doc.working_hours < custom_minimum_working_hours_to_mark_present:
+                doc.working_hours = 0
+            if custom_apply_maximum_working_hours_cap:
+                shift_duration = (end_time.total_seconds() - start_time.total_seconds()) / 3600
+                if doc.working_hours > shift_duration:
+                    doc.working_hours = shift_duration
+
 def on_cancel(doc, method):
     leave = frappe.db.get_value("Leave Ledger Entry", [["transaction_name", "=", doc.name]])
     if leave:
