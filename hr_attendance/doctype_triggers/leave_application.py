@@ -20,7 +20,7 @@ def validate(doc, method):
         if custom_notice_period_for_annual_leave:
             number_of_holidays = frappe.db.count("Holiday", [["parent", "=", holiday_list_name], ["holiday_date","between", [nowdate(), doc.from_date]]])
             number_of_days = date_diff(doc.from_date, nowdate())
-            if (number_of_days - number_of_holidays) < custom_notice_period_for_annual_leave:
+            if (number_of_days - number_of_holidays) < custom_notice_period_for_annual_leave + 1:
                 frappe.throw(_("Leave applications for {0} must be submitted at least {1:.0f} working days before the leave start date. Please adjust your request.").format(doc.leave_type, custom_notice_period_for_annual_leave))
 
         # add validation for hag leave (to be in service at least #number of years)

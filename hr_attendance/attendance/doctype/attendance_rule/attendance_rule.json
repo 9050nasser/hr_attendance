@@ -80,13 +80,16 @@
   "permission_frequency_per_month",
   "link_gskb",
   "target_hours_tab",
-  "enable_penalty_based_on_target_hours",
-  "penalty_amount_per_hour",
-  "penalty_component",
-  "column_break_nhjf",
   "enable_overtime_based_on_target_hours",
-  "factor_per_hour",
-  "overtime_component"
+  "column_break_gooz",
+  "overtime_salary_component",
+  "section_break_bnok",
+  "column_break_bokx",
+  "target_working_hours_per_month",
+  "column_break_nhjf",
+  "minimum_hours_calculated_per_month",
+  "maximum_hours_calculated_per_month",
+  "maximum_amount_per_currency"
  ],
  "fields": [
   {
@@ -502,12 +505,6 @@
    "label": "Target Hours"
   },
   {
-   "default": "0",
-   "fieldname": "enable_penalty_based_on_target_hours",
-   "fieldtype": "Check",
-   "label": "Enable Penalty Based On Target Hours"
-  },
-  {
    "fieldname": "column_break_nhjf",
    "fieldtype": "Column Break"
   },
@@ -518,33 +515,48 @@
    "label": "Enable Overtime Based On Target Hours"
   },
   {
-   "fieldname": "factor_per_hour",
-   "fieldtype": "Currency",
-   "label": "Overtime Amount Per Hour"
+   "fieldname": "section_break_bnok",
+   "fieldtype": "Section Break"
   },
   {
-   "fieldname": "overtime_component",
+   "fieldname": "minimum_hours_calculated_per_month",
+   "fieldtype": "Float",
+   "label": "Minimum Hours Calculated per Month"
+  },
+  {
+   "fieldname": "maximum_hours_calculated_per_month",
+   "fieldtype": "Float",
+   "label": "Maximum Hours Calculated per Month"
+  },
+  {
+   "fieldname": "maximum_amount_per_currency",
+   "fieldtype": "Float",
+   "label": "Maximum Amount per Currency"
+  },
+  {
+   "fieldname": "column_break_gooz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "overtime_salary_component",
    "fieldtype": "Link",
-   "label": "Overtime Component",
+   "label": "Overtime Salary Component",
    "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Earning\"]]",
    "options": "Salary Component"
   },
   {
-   "fieldname": "penalty_component",
-   "fieldtype": "Link",
-   "label": "Penalty Component",
-   "link_filters": "[[\"Salary Component\",\"type\",\"=\",\"Deduction\"]]",
-   "options": "Salary Component"
+   "fieldname": "column_break_bokx",
+   "fieldtype": "Column Break"
   },
   {
-   "fieldname": "penalty_amount_per_hour",
-   "fieldtype": "Currency",
-   "label": "Penalty Amount Per Hour"
+   "fieldname": "target_working_hours_per_month",
+   "fieldtype": "Float",
+   "label": "Target Working Hours (per Month)"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-11 00:14:02.509014",
+ "modified": "2024-12-27 16:20:24.767670",
  "modified_by": "Administrator",
  "module": "Attendance",
  "name": "Attendance Rule",

@@ -10,9 +10,9 @@ def execute(filters=None):
 
     conditions = []
     if filters.get("from_date"):
-        conditions.append(f"la.creation >= '{filters.get('from_date')}'")
+        conditions.append(f"la.posting_date >= '{filters.get('from_date')}'")
     if filters.get("to_date"):
-        conditions.append(f"la.creation <= '{filters.get('to_date')}' ")
+        conditions.append(f"la.posting_date <= '{filters.get('to_date')}' ")
     if filters.get("department"):
         conditions.append(f"e.department = '{filters.get('department')}'")
     if filters.get("branch"):
@@ -31,7 +31,7 @@ def execute(filters=None):
         CONCAT(la.from_date, ' - ', la.to_date) AS leave_period,
         la.custom_approval_status as date_approved_by_tool,
         e.leave_approver AS reports_to_manager_name,
-        DATEDIFF(NOW(), la.creation) AS days_since_submission
+        DATEDIFF(NOW(), la.posting_date) AS days_since_submission
     FROM 
         `tabLeave Application` la
     JOIN 
@@ -55,10 +55,9 @@ def execute(filters=None):
     ]
     chart_data = frappe.db.sql(f"""
         SELECT 
-            e.department,
             COUNT(la.name) AS auto_approved_count,
             ROUND((COUNT(la.name) * 100.0 / 
-                (SELECT COUNT(*) FROM `tabLeave Application` WHERE creation BETWEEN '{filters.get('from_date')}' AND '{filters.get('to_date')}')), 2) AS percentage_auto_approved
+                (SELECT COUNT(*) FROM `tabLeave Application` WHERE posting_date BETWEEN '{filters.get('from_date')}' AND '{filters.get('to_date')}')), 2) AS percentage_auto_approved
         FROM 
             `tabLeave Application` la
         JOIN 
@@ -66,19 +65,18 @@ def execute(filters=None):
         WHERE 
             la.custom_approval_status IS NOT NULL
             {f"AND {condition_query}" if condition_query else ""}
-        GROUP BY 
-            e.department
+
     """, as_dict=True)
 
     # Add chart configuration
     chart = {
         "data": {
-            "labels": [row["department"] for row in chart_data],
+            "labels": ["Auto-Approved Applications"],
             "datasets": [
                 {"name": "Auto-Approved Applications", "values": [row["auto_approved_count"] for row in chart_data]},
                 {"name": "Percentage Auto-Approved", "values": [row["percentage_auto_approved"] for row in chart_data]},
             ],
         },
-        "type": "bar",  # or 'pie'
+        "type": "bar",
     }
     return columns, data, None, chart

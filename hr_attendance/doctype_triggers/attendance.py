@@ -234,7 +234,7 @@ def check_for_overtime(doc, attendance_rule):
         max_month, max_day, mintime = (
             attendance_rule.overtime_maximum_per_month_hours,
             attendance_rule.overtime_maximum_per_day_hours,
-            attendance_rule.maximum_early_overtime_minutes
+            attendance_rule.minimum_early_overtime_minutes
         )
         shift_start, shift_end = frappe.db.get_value("Shift Type", doc.shift, ["start_time", "end_time"])
         overtime_type = get_overtime_type(doc.employee, doc.attendance_date)
@@ -328,25 +328,26 @@ def mark_out_overtime(doc, attendance_rule, max_month, max_day, shift_end):
                 shift = doc.shift,
                 morning = False
             )
-            overtime_name = check_overtime_exist(
-                doc.employee,
-                doc.attendance_date,
-                shift_end,
-                get_time(doc.out_time),
-                "Normal Overtime"
-            )
-            if not overtime_name:
-                make_overtime_request(
+            if doc.out_time:
+                overtime_name = check_overtime_exist(
                     doc.employee,
                     doc.attendance_date,
                     shift_end,
                     get_time(doc.out_time),
-                    "Normal Overtime",
-                    factor,
-                    amount,
-                    diff,
-                    attendance = doc.name
+                    "Normal Overtime"
                 )
+                if not overtime_name:
+                    make_overtime_request(
+                        doc.employee,
+                        doc.attendance_date,
+                        shift_end,
+                        get_time(doc.out_time),
+                        "Normal Overtime",
+                        factor,
+                        amount,
+                        diff,
+                        attendance = doc.name
+                    )
 
 def check_overtime_exist(
     employee,
