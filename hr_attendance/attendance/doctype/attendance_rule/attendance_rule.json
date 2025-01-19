@@ -1,13 +1,14 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "AR-.####",
+ "autoname": "field:name1",
  "creation": "2024-12-02 20:08:25.985767",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "absence_tab",
   "enable_absence_rule",
+  "name1",
   "column_break_sqrj",
   "section_break_wmix",
   "deduct_from_salary",
@@ -86,6 +87,8 @@
   "section_break_bnok",
   "column_break_bokx",
   "target_working_hours_per_month",
+  "target_overtime_amount_per_hour_normal",
+  "target_overtime_amount_per_hour_holiday",
   "column_break_nhjf",
   "minimum_hours_calculated_per_month",
   "maximum_hours_calculated_per_month",
@@ -552,15 +555,31 @@
    "fieldname": "target_working_hours_per_month",
    "fieldtype": "Float",
    "label": "Target Working Hours (per Month)"
+  },
+  {
+   "fieldname": "target_overtime_amount_per_hour_normal",
+   "fieldtype": "Float",
+   "label": "Target Overtime Amount Per Hour (Normal)"
+  },
+  {
+   "fieldname": "target_overtime_amount_per_hour_holiday",
+   "fieldtype": "Float",
+   "label": "Target Overtime Amount Per Hour (Holiday)"
+  },
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-27 16:20:24.767670",
+ "modified": "2025-01-15 15:44:49.206598",
  "modified_by": "Administrator",
  "module": "Attendance",
  "name": "Attendance Rule",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

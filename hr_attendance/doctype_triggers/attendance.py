@@ -74,10 +74,9 @@ def check_for_absence(doc, attendance_rule, holiday_list):
                 )
 
 def check_for_late_early(doc, attendance_rule):
-    if not doc.shift:
+    if not doc.shift and not doc.leave_application:
         frappe.throw(_("Shift is not specified"))
-    else:
-    
+    if doc.shift:
         (shift_start,
         shift_end,
         enable_late_entry_marking,
@@ -229,33 +228,35 @@ def check_for_overtime(doc, attendance_rule):
         attendance_rule.enable_overtime or
         attendance_rule.enable_overtime_morningevening or
         attendance_rule.enable_overtime_categories or
-        attendance_rule.enable_overtime_fixed_amount
+        attendance_rule.enable_overtime_fixed_amount or
+        attendance_rule.enable_overtime_based_on_target_hours
         ):
         max_month, max_day, mintime = (
             attendance_rule.overtime_maximum_per_month_hours,
             attendance_rule.overtime_maximum_per_day_hours,
             attendance_rule.minimum_early_overtime_minutes
         )
-        shift_start, shift_end = frappe.db.get_value("Shift Type", doc.shift, ["start_time", "end_time"])
-        overtime_type = get_overtime_type(doc.employee, doc.attendance_date)
+        if doc.shift:
+            shift_start, shift_end = frappe.db.get_value("Shift Type", doc.shift, ["start_time", "end_time"])
+            overtime_type = get_overtime_type(doc.employee, doc.attendance_date)
 
-        mark_early_overtime(
-            doc,
-            attendance_rule,
-            max_month,
-            max_day,
-            mintime,
-            shift_start,
-            overtime_type
-        )
-        if overtime_type == "Normal Overtime":
-            mark_out_overtime(
+            mark_early_overtime(
                 doc,
                 attendance_rule,
                 max_month,
                 max_day,
-                shift_end
+                mintime,
+                shift_start,
+                overtime_type
             )
+            if overtime_type == "Normal Overtime":
+                mark_out_overtime(
+                    doc,
+                    attendance_rule,
+                    max_month,
+                    max_day,
+                    shift_end
+                )
 
 def mark_early_overtime(doc, attendance_rule, max_month, max_day, mintime, shift_start, overtime_type):
     if doc.status != "Absent":
@@ -497,6 +498,12 @@ def get_overtime(
         elif overtime_type == "Normal Overtime":
             factor = attendance_rule.overtime_normal_factor_per_hour
         overtime = diff * factor * hourly_salary
+    elif attendance_rule.enable_overtime_based_on_target_hours:
+        if overtime_type == "Normal Overtime":
+            factor = attendance_rule.target_overtime_amount_per_hour_normal
+        else:
+            factor = attendance_rule.target_overtime_amount_per_hour_holiday
+        overtime = diff * factor
     return (overtime, factor)
 
 def get_diff_factor_for_morningevening(attendance_rule, in_time:datetime, out_time:datetime, overtime_type):

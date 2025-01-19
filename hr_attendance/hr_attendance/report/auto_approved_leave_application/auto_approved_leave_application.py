@@ -38,7 +38,7 @@ def execute(filters=None):
         `tabEmployee` e ON la.employee = e.name
     WHERE 
         la.custom_approval_status IS NOT NULL
-                         AND la.status = 'Approved'
+                         AND la.custom_approval_status = 'Approved by System'
         {f"AND {condition_query}" if condition_query else ""}
 """)
 
@@ -57,13 +57,13 @@ def execute(filters=None):
         SELECT 
             COUNT(la.name) AS auto_approved_count,
             ROUND((COUNT(la.name) * 100.0 / 
-                (SELECT COUNT(*) FROM `tabLeave Application` WHERE posting_date BETWEEN '{filters.get('from_date')}' AND '{filters.get('to_date')}')), 2) AS percentage_auto_approved
+                (SELECT COUNT(*) FROM `tabLeave Application` WHERE status = 'Approved' and  posting_date BETWEEN '{filters.get('from_date')}' AND '{filters.get('to_date')}'  )), 2) AS percentage_auto_approved
         FROM 
             `tabLeave Application` la
         JOIN 
             `tabEmployee` e ON la.employee = e.name
         WHERE 
-            la.custom_approval_status IS NOT NULL
+           la.custom_approval_status = 'Approved by System'
             {f"AND {condition_query}" if condition_query else ""}
 
     """, as_dict=True)

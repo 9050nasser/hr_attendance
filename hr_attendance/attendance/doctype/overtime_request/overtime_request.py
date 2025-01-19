@@ -49,6 +49,7 @@ class OvertimeRequest(Document):
 		additional_salary.submit()
 	def validate(self):
 		existing_overtime = frappe.db.get_value("Overtime Request", {
+			"name": ["!=", self.name],
 			"date" : self.date,
 			"employee" : self.employee,
     	})
